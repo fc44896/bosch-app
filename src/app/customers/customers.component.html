@@ -1,0 +1,14 @@
+<h2>Customers</h2>
+<ul>
+  <li *ngFor="let customer of customers">
+    <button type="button">
+      <span>{{customer.id}}</span>
+      <span >{{customer.firstName}}</span>
+      <span >{{customer.lastName}}</span>
+      <span >{{customer.birthDate | date}}</span>
+      <span >{{customer.email}}</span>
+      <span >{{customer.avatar}}</span>
+      <span >{{customer.hasContract}}</span>
+    </button>
+  </li>
+</ul>
