@@ -1,0 +1,33 @@
+<mat-button-toggle-group #group="matButtonToggleGroup" name="HasContract" [value]="isFilterContract" (change)="filter(group.value)" aria-label="Filter By Contract">
+  <mat-button-toggle value="true">With contract</mat-button-toggle>
+  <mat-button-toggle value="false">Without contract</mat-button-toggle>
+  <mat-button-toggle value="all">All</mat-button-toggle>
+</mat-button-toggle-group>
+
+<table mat-table [dataSource]="dataSource" class="table">
+  <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ col.label }}
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
+        <div class="btn-edit" *ngSwitchCase="'isEdit'">
+          <button mat-raised-button color="primary" (click)="getDetails(element)">
+            Details
+          </button>
+          <button mat-raised-button color="warn" (click)="removeCustomer(element.id)">
+            Delete
+          </button>
+        </div>
+        <span *ngSwitchCase="'date'">
+          {{ element[col.key] | date: 'mediumDate' }} <img class="icon" *ngIf="element.isBirthday" src="../../../assets/cake.png"> 
+        </span>
+        <span *ngSwitchDefault>
+          {{ element[col.key] }}
+        </span>
+      </div>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-header"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns" [class.birthday]="row.isBirthday"></tr>
+</table>

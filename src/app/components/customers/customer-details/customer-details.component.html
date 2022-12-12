@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Customer Details</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>{{customer.firstName}} </mat-card-title>
+      <mat-card-subtitle>{{customer.lastName}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <img  mat-card-md-image  class="cosAvatar" src="{{customer.avatar}}">
+      <h2><b>Details</b></h2>
+      <div>
+        <h4><b>Email: </b> {{customer.email}}</h4>
+        <h4><b>Birth date: </b> {{customer.birthDate | date: 'mediumDate'}}</h4>
+        <div *ngIf="customer.hasContract">
+          <h4><b>Has Contract: </b>Yes</h4>
+        </div>
+        <div *ngIf="!customer.hasContract">
+          <h4><b>Has Contract: </b>No</h4>
+        </div>
+
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
